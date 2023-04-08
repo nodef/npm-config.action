@@ -25,32 +25,32 @@ function hasRegex(x, re) {
     if (re.test(v)) return true;
   return false;
 }
-// Populate default (auto) registries for npm and GitHub Packages.
-function populateDefaultRegistries(registries) {
-  if (!hasRegex(registries, /^(auto|default)$/i)) return registries;
-  registries  = registries.filter(r => !/^auto$/i.test(r));
+// Populate credentials for npm and GitHub Packages from environment variables.
+function populateDefaultCredentials(xs) {
+  if (!hasRegex(xs, /^(auto|default)$/i)) return xs;
+  xs  = xs.filter(r => !/^auto$/i.test(r));
   const NPM_TOKEN    = E.NPM_TOKEN || '';
   const GITHUB_TOKEN = E.GH_TOKEN  || E.GITHUB_TOKEN || '';
-  if (NPM_TOKEN)    registries.push(`//registry.npmjs.org/:_authToken=${NPM_TOKEN}`);
-  if (GITHUB_TOKEN) registries.push(`//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}`);
-  return registries;
+  if (NPM_TOKEN)    xs.push(`//registry.npmjs.org/:_authToken=${NPM_TOKEN}`);
+  if (GITHUB_TOKEN) xs.push(`//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}`);
+  return xs;
 }
 
 
-// Fix a registry string.
-function fixRegistry(txt) {
-  var i = txt.lastIndexOf(':');
-  var k = txt.substring(0, i).trim();
-  var v = txt.substring(i+1) .trim();
+// Fix a credential string.
+function fixCredential(x) {
+  var i = x.lastIndexOf(':');
+  var k = x.substring(0, i).trim();
+  var v = x.substring(i+1) .trim();
   k = k.replace(/^((\w+:)?\/\/)?/, '//').replace(/\/?$/, '/');
   v = v.replace(/^(_?authToken=)?/i, '_authToken=');
   return `${k}:${v}`;
 }
 // Fix an entry (config) string.
-function fixEntry(txt) {
-  var i = txt.lastIndexOf('=');
-  var k = txt.substring(0, i).trim();
-  var v = txt.substring(i+1) .trim();
+function fixEntry(x) {
+  var i = x.lastIndexOf('=');
+  var k = x.substring(0, i).trim();
+  var v = x.substring(i+1) .trim();
   return `${k}=${v}`;
 }
 
@@ -61,12 +61,12 @@ function main() {
   const PATH = E.NPM_CONFIG_USERCONFIG || `${HOME}/.npmrc`;
   let   path = core.getInput('path')   || PATH;
   let  reset = core.getBooleanInput('reset') || false;
-  let registries = core.getMultilineInput('registries') || [];
-  let    entries = core.getMultilineInput('entries')    || [];
-  let  npmrc = reset? '' : readFile(path);
-  registries = populateDefaultRegistries(registries);
-  for (let r of registries)
-    npmrc += fixRegistry(r) + '\n';
+  let credentials = core.getMultilineInput('credentials') || [];
+  let     entries = core.getMultilineInput('entries')     || [];
+  let   npmrc = reset? '' : readFile(path);
+  credentials = populateDefaultCredentials(credentials);
+  for (let c of credentials)
+    npmrc += fixCredential(c) + '\n';
   for (let e of entries)
     npmrc += fixEntry(e) + '\n';
   writeFile(path, npmrc);

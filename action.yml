@@ -16,7 +16,7 @@ inputs:
     description: 'Reset .npmrc file?'
     required: false
     default:  false
-  registries:
+  credentials:
     description: 'List of registries and associated auth-tokens (newline separated)'
     required: false
     default:  ''
