@@ -2,7 +2,7 @@ A GitHub Action for configuring npm.
 
 ```yaml
 # Configure credentials for npm and GitHub Packages.
-- uses: nodef/npm-config.action@v0.1.0
+- uses: nodef/npm-config.action@v0.3.0
   with:
     credentials: |-
       registry.npmjs.org=${{secrets.NPM_TOKEN}}
@@ -11,13 +11,13 @@ A GitHub Action for configuring npm.
 
 # Automatically configure credentials using environment variables.
 # Needs $NPM_TOKEN and $GH_TOKEN/$GITHUB_TOKEN to be set.
-- uses: nodef/npm-config.action@v0.1.0
+- uses: nodef/npm-config.action@v0.3.0
   with:
-    registries: auto
+    credentials: auto
 
 
 # Add a scope for GitHub Packages, and allow packages to be publicly visible
-- uses: nodef/npm-config.action@v0.1.0
+- uses: nodef/npm-config.action@v0.3.0
   with:
     credentials: auto
     entries: |-
@@ -31,7 +31,7 @@ A GitHub Action for configuring npm.
 #### Options
 
 ```yaml
-- uses: nodef/npm-config.action@v0.1.0
+- uses: nodef/npm-config.action@v0.3.0
   with:
     path: $HOME/.npmrc  # Path to the .npmrc file
     reset: false        # Reset the .npmrc file
@@ -61,3 +61,4 @@ A GitHub Action for configuring npm.
 - [How to use array input for a custom GitHub Actions](https://stackoverflow.com/a/75420778/1413259)
 - [Give credentials to npm login command line](https://stackoverflow.com/a/54540693/1413259)
 - [How to restore/reset npm configuration to default values?](https://stackoverflow.com/a/20934521/1413259)
+- [Why does the npm userconfig not get picked up?](https://stackoverflow.com/a/52316526/1413259)
