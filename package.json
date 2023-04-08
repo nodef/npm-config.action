@@ -1,0 +1,29 @@
+{
+  "name": "npm-config.action",
+  "version": "0.0.1",
+  "description": "A GitHub Action for configuring npm.",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nodef/npm-config.action.git"
+  },
+  "keywords": [
+    "github",
+    "action",
+    "npm",
+    "config"
+  ],
+  "author": "wolfram77@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nodef/npm-config.action/issues"
+  },
+  "homepage": "https://github.com/nodef/npm-config.action#readme",
+  "dependencies": {
+    "@actions/core": "^1.10.0"
+  }
+}
