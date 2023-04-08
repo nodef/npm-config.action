@@ -16,11 +16,11 @@ inputs:
     description: 'Reset .npmrc file?'
     required: false
     default:  false
-  scopes:
-    description: 'List of scopes and associated registries (newline separated)'
-    required: false
-    default:  ''
   registries:
     description: 'List of registries and associated auth-tokens (newline separated)'
+    required: false
+    default:  ''
+  entries:
+    description: 'List of entries to add to .npmrc file (newline separated)'
     required: false
     default:  ''

@@ -27,8 +27,8 @@ function hasRegex(x, re) {
 }
 // Populate default (auto) registries for npm and GitHub Packages.
 function populateDefaultRegistries(registries) {
-  if (!hasRegex(registries, /^auto$/i)) return registries;
-  registries = registries.filter(r => !/^auto$/i.test(r));
+  if (!hasRegex(registries, /^(auto|default)$/i)) return registries;
+  registries  = registries.filter(r => !/^auto$/i.test(r));
   const NPM_TOKEN    = E.NPM_TOKEN || '';
   const GITHUB_TOKEN = E.GH_TOKEN  || E.GITHUB_TOKEN || '';
   if (NPM_TOKEN)    registries.push(`//registry.npmjs.org/:_authToken=${NPM_TOKEN}`);
@@ -37,17 +37,6 @@ function populateDefaultRegistries(registries) {
 }
 
 
-// Fix a scope string.
-function fixScope(txt) {
-  var i = txt.lastIndexOf('=');
-  var k = txt.substring(0, i).trim();
-  var v = txt.substring(i+1) .trim();
-  if (!k.startsWith('@')) k  = '@' + k;
-  if (!k.includes(':'))   k += ':registry';
-  if (!v.includes('//'))  v  = '//' + v;
-  if (/^\w+:/.test(v))    v  = 'https:' + v;
-  return `${k}=${v}`;
-}
 // Fix a registry string.
 function fixRegistry(txt) {
   var i = txt.lastIndexOf(':');
@@ -72,13 +61,10 @@ function main() {
   const PATH = E.NPM_CONFIG_USERCONFIG || `${HOME}/.npmrc`;
   let   path = core.getInput('path')   || PATH;
   let  reset = core.getBooleanInput('reset') || false;
-  let     scopes = core.getMultilineInput('scopes')     || [];
   let registries = core.getMultilineInput('registries') || [];
   let    entries = core.getMultilineInput('entries')    || [];
   let  npmrc = reset? '' : readFile(path);
   registries = populateDefaultRegistries(registries);
-  for (let s of scopes)
-    npmrc += fixScope(s) + '\n';
   for (let r of registries)
     npmrc += fixRegistry(r) + '\n';
   for (let e of entries)
