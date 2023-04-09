@@ -59,11 +59,11 @@ function fixEntry(x) {
 function main() {
   const HOME = E.HOME || E.HOMEPATH || E.USERPROFILE;
   const PATH = E.NPM_CONFIG_USERCONFIG || `${HOME}/.npmrc`;
-  let   path = core.getInput('path')   || PATH;
-  let  reset = core.getBooleanInput('reset') || false;
-  let credentials = core.getMultilineInput('credentials') || [];
-  let     entries = core.getMultilineInput('entries')     || [];
-  let   npmrc = reset? '' : readFile(path);
+  var   path = core.getInput('path')   || PATH;
+  var  reset = core.getBooleanInput('reset') || false;
+  var credentials = core.getMultilineInput('credentials') || [];
+  var     entries = core.getMultilineInput('entries')     || [];
+  var   npmrc = reset? '' : readFile(path);
   credentials = populateDefaultCredentials(credentials);
   for (let c of credentials)
     npmrc += fixCredential(c) + '\n';

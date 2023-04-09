@@ -2,7 +2,7 @@ A GitHub Action for configuring npm.
 
 ```yaml
 # Configure credentials for npm and GitHub Packages.
-- uses: nodef/npm-config.action@v0.3.0
+- uses: nodef/npm-config.action@v0.4.0
   with:
     credentials: |-
       registry.npmjs.org=${{secrets.NPM_TOKEN}}
@@ -11,13 +11,13 @@ A GitHub Action for configuring npm.
 
 # Automatically configure credentials using environment variables.
 # Needs $NPM_TOKEN and $GH_TOKEN/$GITHUB_TOKEN to be set.
-- uses: nodef/npm-config.action@v0.3.0
+- uses: nodef/npm-config.action@v0.4.0
   with:
     credentials: auto
 
 
 # Add a scope for GitHub Packages, and allow packages to be publicly visible
-- uses: nodef/npm-config.action@v0.3.0
+- uses: nodef/npm-config.action@v0.4.0
   with:
     credentials: auto
     entries: |-
@@ -31,7 +31,7 @@ A GitHub Action for configuring npm.
 #### Options
 
 ```yaml
-- uses: nodef/npm-config.action@v0.3.0
+- uses: nodef/npm-config.action@v0.4.0
   with:
     path: $HOME/.npmrc  # Path to the .npmrc file
     reset: false        # Reset the .npmrc file
@@ -39,7 +39,7 @@ A GitHub Action for configuring npm.
       myregistry1=authtoken1
       myregistry2=authtoken2
       ...
-    entries: |-         # Additional entries to add
+    entries: |-         # Entries to add
       key1=value1
       key2=value2
       ...
