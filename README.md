@@ -16,10 +16,10 @@ A GitHub Action for configuring npm.
     credentials: auto
 
 
-# Add a scope for GitHub Packages, and allow packages to be publicly visible
+# Automatically configure credentials, add a scope for GitHub Packages,
+# and allow packages to be publicly visible.
 - uses: nodef/npm-config.action@v0.4.0
   with:
-    credentials: auto
     entries: |-
       @myorg:registry=https://npm.pkg.github.com
       access=public
@@ -35,7 +35,7 @@ A GitHub Action for configuring npm.
   with:
     path: $HOME/.npmrc  # Path to the .npmrc file
     reset: false        # Reset the .npmrc file
-    credentials: |-     # Credentials to configure
+    credentials: |-     # Credentials to configure [auto]
       myregistry1=authtoken1
       myregistry2=authtoken2
       ...

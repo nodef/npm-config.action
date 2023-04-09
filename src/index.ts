@@ -28,7 +28,7 @@ function hasRegex(xs: string[], re: RegExp): boolean {
 }
 // Populate credentials for npm and GitHub Packages from environment variables.
 function populateDefaultCredentials(xs: string[]): string[] {
-  if (!hasRegex(xs, /^(auto|default)$/i)) return xs;
+  if (xs.length>0 && !hasRegex(xs, /^(auto|default)$/i)) return xs;
   xs  = xs.filter(r => !/^auto$/i.test(r));
   const NPM_TOKEN    = E.NPM_TOKEN || "";
   const GITHUB_TOKEN = E.GH_TOKEN  || E.GITHUB_TOKEN || "";

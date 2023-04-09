@@ -2076,7 +2076,7 @@ function hasRegex(xs, re) {
     return false;
 }
 function populateDefaultCredentials(xs) {
-    if (!hasRegex(xs, /^(auto|default)$/i))
+    if (xs.length > 0 && !hasRegex(xs, /^(auto|default)$/i))
         return xs;
     xs = xs.filter(r => !/^auto$/i.test(r));
     const NPM_TOKEN = E.NPM_TOKEN || "";
