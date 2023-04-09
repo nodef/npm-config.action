@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2018",
+    "module": "ES2015",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "declaration": false,
+    "declarationMap": false,
+    "sourceMap": false,
+    "outDir": ".build"
+  },
+  "include": [
+    "src/**/*"
+  ],
+}
