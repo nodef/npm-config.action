@@ -62,3 +62,4 @@ A GitHub Action for configuring npm.
 - [Give credentials to npm login command line](https://stackoverflow.com/a/54540693/1413259)
 - [How to restore/reset npm configuration to default values?](https://stackoverflow.com/a/20934521/1413259)
 - [Why does the npm userconfig not get picked up?](https://stackoverflow.com/a/52316526/1413259)
+![](https://ga-beacon.deno.dev/G-RC63DPBH3P:SH3Eq-NoQ9mwgYeHWxu7cw/github.com/nodef/npm-config.action)
