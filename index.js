@@ -2,8 +2,8 @@
 
 var require$$0 = require('os');
 var fs = require('fs');
-var require$$0$1 = require('crypto');
 var require$$1$1 = require('path');
+var require$$0$1 = require('crypto');
 var require$$2 = require('http');
 var require$$3 = require('https');
 require('net');
@@ -34,6 +34,7 @@ function _interopNamespaceDefault(e) {
 
 var require$$0__namespace = /*#__PURE__*/_interopNamespaceDefault(require$$0);
 var fs__namespace = /*#__PURE__*/_interopNamespaceDefault(fs);
+var require$$1__namespace = /*#__PURE__*/_interopNamespaceDefault(require$$1$1);
 
 var core = {};
 
@@ -2797,17 +2798,17 @@ function fixEntry(x) {
 }
 function main() {
     const HOME = require$$0__namespace.platform() === "win32" ? E.USERPROFILE : E.HOME || E.HOMEPATH;
-    const PATH = E.NPM_CONFIG_USERCONFIG || path.join(HOME || ".", ".npmrc");
-    var path = coreExports.getInput("path") || PATH;
-    var reset = coreExports.getBooleanInput("reset") || false;
-    var credentials = coreExports.getMultilineInput("credentials") || [];
-    var entries = coreExports.getMultilineInput("entries") || [];
-    var npmrc = reset ? "" : readFile(path);
-    credentials = populateDefaultCredentials(credentials);
-    for (let c of credentials)
+    const PATH = E.NPM_CONFIG_USERCONFIG || require$$1__namespace.join(HOME || ".", ".npmrc");
+    var ipath = coreExports.getInput("path") || PATH;
+    var ireset = coreExports.getBooleanInput("reset") || false;
+    var icredentials = coreExports.getMultilineInput("credentials") || [];
+    var ientries = coreExports.getMultilineInput("entries") || [];
+    var npmrc = ireset ? "" : readFile(ipath);
+    icredentials = populateDefaultCredentials(icredentials);
+    for (let c of icredentials)
         npmrc += fixCredential(c) + "\n";
-    for (let e of entries)
+    for (let e of ientries)
         npmrc += fixEntry(e) + "\n";
-    writeFile(path, npmrc);
+    writeFile(ipath, npmrc);
 }
 main();

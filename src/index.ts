@@ -61,16 +61,16 @@ function fixEntry(x: string): string {
 function main(): void {
   const HOME = os.platform() === "win32"? E.USERPROFILE : E.HOME || E.HOMEPATH;
   const PATH = E.NPM_CONFIG_USERCONFIG || path.join(HOME || ".", ".npmrc");
-  var   path = core.getInput("path")   || PATH;
-  var  reset = core.getBooleanInput("reset") || false;
-  var credentials = core.getMultilineInput("credentials") || [];
-  var     entries = core.getMultilineInput("entries")     || [];
-  var   npmrc = reset? "" : readFile(path);
-  credentials = populateDefaultCredentials(credentials);
-  for (let c of credentials)
+  var   ipath = core.getInput("path")   || PATH;
+  var  ireset = core.getBooleanInput("reset") || false;
+  var icredentials = core.getMultilineInput("credentials") || [];
+  var     ientries = core.getMultilineInput("entries")     || [];
+  var   npmrc = ireset? "" : readFile(ipath);
+  icredentials = populateDefaultCredentials(icredentials);
+  for (let c of icredentials)
     npmrc += fixCredential(c) + "\n";
-  for (let e of entries)
+  for (let e of ientries)
     npmrc += fixEntry(e) + "\n";
-  writeFile(path, npmrc);
+  writeFile(ipath, npmrc);
 }
 main();
