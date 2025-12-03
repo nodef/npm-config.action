@@ -1,5 +1,6 @@
 import * as os   from "os";
 import * as fs   from "fs";
+import * as path from "path";
 import * as core from "@actions/core";
 
 
@@ -58,8 +59,8 @@ function fixEntry(x: string): string {
 
 // Main function.
 function main(): void {
-  const HOME = E.HOME || E.HOMEPATH || E.USERPROFILE;
-  const PATH = E.NPM_CONFIG_USERCONFIG || `${HOME}/.npmrc`;
+  const HOME = os.platform() === "win32"? E.USERPROFILE : E.HOME || E.HOMEPATH;
+  const PATH = E.NPM_CONFIG_USERCONFIG || path.join(HOME || ".", ".npmrc");
   var   path = core.getInput("path")   || PATH;
   var  reset = core.getBooleanInput("reset") || false;
   var credentials = core.getMultilineInput("credentials") || [];
